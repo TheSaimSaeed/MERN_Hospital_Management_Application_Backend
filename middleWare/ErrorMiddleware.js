@@ -9,7 +9,7 @@ export const ErrorMiddlewareMesg = (err,req, res, next)=>{
     err.message = err.message || "Internal Server Error";
     err.statusCode = err.statusCode || 500;
     
-    if(err.status===1100){
+    if(err.status===11000){
        const message = "Duplicate values";
        err = new Errorhandler(message, 400);    
     }

@@ -7,6 +7,10 @@ import fileUpload from 'express-fileupload';
 import {dbConnection} from './Database/databaseConnect.js';
 import MessageRouter from './router/messageRouter.js'
 import { ErrorMiddlewareMesg } from './middleWare/ErrorMiddleware.js';
+import PatientRouter from "./router/UserRouter.js";
+
+
+
 
 config({path:'./config/config.env'})
 
@@ -32,6 +36,7 @@ app.use(
 );
 
 app.use("/api/v1/message",MessageRouter);
+app.use("/api/v1/user",PatientRouter);
 
 dbConnection();
 
