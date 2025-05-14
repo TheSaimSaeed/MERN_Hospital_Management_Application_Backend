@@ -61,6 +61,12 @@ const UserSchema = new mongoose.Schema({
         minLength: [8, "Must have atleast 8 characters."],
     },
 
+    Confirmpassword:{
+        type: String,
+        select: false,
+        minLength: [8, "Must have atleast 8 characters."],
+    },
+
     DocDepartment:{
         type: String,
     },
@@ -89,7 +95,7 @@ UserSchema.methods.VerifyPassword = async function (enteredpassword) {
     return await bcrypt.compare(enteredpassword, this.password);
 }
 
-UserSchema.methods.GenerateJWToken = function(){
+UserSchema.methods.GenerateJsonWebToken = function(){
     return jwt.sign({id : this._id}, process.env.JWT_SECRET_KEY, {expiresIn:process.env.JWT_EXPIRES,});
 }
 
