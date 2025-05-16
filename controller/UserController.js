@@ -79,3 +79,12 @@ export const AdminRegister = catchAsyncErrors(async(req, res, next)=>{
     })
 
 })
+
+
+const findAllDoctors = catchAsyncErrors(async(req, res, next)=>{
+    const doctors = User.find({role:'Doctor'});
+    res.status(200).json({
+        success:true,
+        doctors
+    })
+})
