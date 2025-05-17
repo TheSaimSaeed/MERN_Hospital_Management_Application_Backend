@@ -25,6 +25,9 @@ export const patientRegister = async (req, res, next) => {
 }
 
 
+
+
+
 export const Login = catchAsyncErrors((async (req, res, next) => {
     const { email, password, Confirmpassword, role } = req.body;
     if (!email || !password || !Confirmpassword || !role) {
@@ -55,7 +58,10 @@ export const Login = catchAsyncErrors((async (req, res, next) => {
 
 
     GenerateJwtToken(user, "User logined successfully!", 200, res);
-}))
+}));
+
+
+
 
 export const AdminRegister = catchAsyncErrors(async(req, res, next)=>{
     const {firstName, lastName, cnic,password, email, phone, dob, gender } = req.body;
@@ -81,10 +87,31 @@ export const AdminRegister = catchAsyncErrors(async(req, res, next)=>{
 })
 
 
-const findAllDoctors = catchAsyncErrors(async(req, res, next)=>{
-    const doctors = User.find({role:'Doctor'});
+export const findAllDoctors = catchAsyncErrors(async(req, res, next)=>{
+    const doctors = await User.find({role:'Doctor'});
     res.status(200).json({
         success:true,
-        doctors
+        doctors,
+    })
+})
+
+
+
+export const getUserDetails = catchAsyncErrors(async(req, res, next)=>{
+    const user = req.user;
+    res.status(200).json({
+        success:true,
+        user,
+    })
+})
+
+
+export const LogoutAdmin = catchAsyncErrors((req, res, next)=>{
+    res.status(200).cookie("AdminToken",null,{
+        httpOnly:true, //Understd ?
+        expires: new Date(Date.now()),
+    }).json({
+        success:true,
+        message:"Admin Logout Successfully!"
     })
 })
