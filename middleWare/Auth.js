@@ -1,7 +1,7 @@
 import { User } from "../models/UserSchema.js";
 import { catchAsyncErrors } from "./AsyncErrorMiddleware.js";
 import jwt, { decode } from "jsonwebtoken";
-import Errorhandler from "./ErrorMiddleware";
+import Errorhandler from "./ErrorMiddleware.js";
 
 
 export const AdminAuthentication = catchAsyncErrors(async(req, res, next)=>{
@@ -23,7 +23,7 @@ export const AdminAuthentication = catchAsyncErrors(async(req, res, next)=>{
 
 })
 
-export const PatientAuthentication = catchAsyncErrors(async()=>{
+export const PatientAuthentication = catchAsyncErrors(async(req, res,next)=>{
      //This is Authentication
     const token = req.cookies.PatientToken; //May be error
     if(!token){

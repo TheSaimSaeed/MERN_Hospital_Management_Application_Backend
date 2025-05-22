@@ -96,7 +96,7 @@ UserSchema.methods.VerifyPassword = async function (enteredpassword) {
 }
 
 UserSchema.methods.GenerateJsonWebToken = function(){
-    return jwt.sign({id : this._id}, process.env.JWT_SECRET_KEY, {expiresIn:process.env.JWT_EXPIRES,});
+    return jwt.sign({id : this._id, role:this.role}, process.env.JWT_SECRET_KEY, {expiresIn:process.env.JWT_EXPIRES});
 }
 
 export const User = mongoose.model("User", UserSchema);
