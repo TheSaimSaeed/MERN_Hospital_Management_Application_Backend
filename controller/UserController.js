@@ -136,7 +136,7 @@ export const AddNewDoctor = catchAsyncErrors(async (req, res, next) => {
     } = req.body;
 
     if (
-        !firstName || !lastName || !cnic || !password || !email || !phone || !dob || !gender || !DocDepartment
+        !firstName || !lastName || !cnic || !password || !email || !phone || !dob || !gender || !DocDepartment || !DocAvatar
     ) {
         return next(new Errorhandler("Fill all the fileds!"), 400)
     }
@@ -171,7 +171,7 @@ export const AddNewDoctor = catchAsyncErrors(async (req, res, next) => {
     res.status(200).json({
         success:true,
         message:"Doctor Succussfully Registered!",
-        doctor
+        doctor,
     });
 
 
